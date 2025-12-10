@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Hotel Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="mb-4">Welcome to Your Dashboard, {{ current_user.username }}!</h2>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-center bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Analyses</h5>
+                <h2>{{ stats.total }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Positive</h5>
+                <h2>{{ stats.positive }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center bg-danger text-white">
+            <div class="card-body">
+                <h5 class="card-title">Negative</h5>
+                <h2>{{ stats.negative }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center bg-secondary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Neutral</h5>
+                <h2>{{ stats.neutral }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4>Quick Actions</h4>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('routes.analyze') }}" class="btn btn-primary btn-lg me-2">Analyze New Review</a>
+                <a href="{{ url_for('routes.analyze') }}" class="btn btn-outline-primary btn-lg me-2">Batch Analysis</a>
+                <a href="{{ url_for('routes.analyze_dataset') }}" class="btn btn-success btn-lg">Analyze Real Dataset</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Analyses -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h4>Recent Analyses</h4>
+            </div>
+            <div class="card-body">
+                {% if recent_analyses %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Review</th>
+                                <th>Sentiment</th>
+                                <th>Polarity</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for analysis in recent_analyses %}
+                            <tr>
+                                <td>
+                                    <small>{{ analysis.review_text[:100] }}{% if analysis.review_text|length > 100 %}...{% endif %}</small>
+                                </td>
+                                <td>
+                                    {% if analysis.sentiment == 'positive' %}
+                                        <span class="badge bg-success">{{ analysis.sentiment }}</span>
+                                    {% elif analysis.sentiment == 'negative' %}
+                                        <span class="badge bg-danger">{{ analysis.sentiment }}</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">{{ analysis.sentiment }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ analysis.polarity }}</td>
+                                <td><small>{{ analysis.created_at.strftime('%Y-%m-%d %H:%M') }}</small></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">No analyses yet. <a href="{{ url_for('routes.analyze') }}">Start analyzing reviews!</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

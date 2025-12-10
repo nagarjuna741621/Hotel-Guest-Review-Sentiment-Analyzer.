@@ -1,0 +1,25 @@
+# Hotel Guest Sentiment Analysis - Required Packages
+# Install using: pip install -r requirements.txt
+
+# Core Data Science Libraries
+numpy>=1.21.0
+pandas>=1.3.0
+
+# Natural Language Processing
+nltk>=3.8.1        # Updated for modern VADER
+textblob>=0.17.0   # Keep for comparison/utility but no longer core
+scikit-learn>=1.4.2 # NEW: For ML Classification
+
+# Visualization
+matplotlib>=3.4.0
+seaborn>=0.11.0
+
+# Web Framework
+Flask>=2.0.0
+Flask-Login>=0.6.0
+Flask-SQLAlchemy>=2.5.0
+Werkzeug>=2.0.0
+
+# Jupyter Notebook Support (if using locally)
+jupyter>=1.0.0
+ipykernel>=6.0.0

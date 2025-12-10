@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Hotel Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+            <h1 class="display-4">🏨 Hotel Guest Sentiment Analysis</h1>
+            <p class="lead">Leverage NLP to analyze guest reviews and extract actionable insights</p>
+            <hr class="my-4 bg-white">
+            <p>Quickly and accurately assess guest sentiment from reviews to identify pain points, satisfaction trends, and areas for improvement.</p>
+            {% if not current_user.is_authenticated %}
+            <a class="btn btn-light btn-lg" href="{{ url_for('routes.signup') }}" role="button">Get Started</a>
+            <a class="btn btn-outline-light btn-lg" href="{{ url_for('routes.login') }}" role="button">Login</a>
+            {% else %}
+            <a class="btn btn-light btn-lg" href="{{ url_for('routes.analyze') }}" role="button">Analyze Reviews</a>
+            <a class="btn btn-outline-light btn-lg" href="{{ url_for('routes.dashboard') }}" role="button">Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h2 class="card-title">📊 Task 1</h2>
+                <h5 class="text-primary">Data Preparation</h5>
+                <p class="card-text">Clean and preprocess guest reviews by removing special characters, converting to lowercase, and normalizing text for analysis.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h2 class="card-title">🔍 Task 2</h2>
+                <h5 class="text-primary">Sentiment Analysis</h5>
+                <p class="card-text">Classify reviews as positive, negative, or neutral using TextBlob NLP library to extract sentiment polarity.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h2 class="card-title">📈 Task 3</h2>
+                <h5 class="text-primary">Visualization</h5>
+                <p class="card-text">Visualize sentiment distribution using bar charts and pie charts to understand guest satisfaction trends.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4>Key Features</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">✅ User authentication (Sign up/Login)</li>
+                            <li class="mb-2">✅ Single review sentiment analysis</li>
+                            <li class="mb-2">✅ Batch review processing</li>
+                            <li class="mb-2">✅ Real-time sentiment classification</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">✅ Interactive visualizations</li>
+                            <li class="mb-2">✅ Analysis history tracking</li>
+                            <li class="mb-2">✅ User dashboard with statistics</li>
+                            <li class="mb-2">✅ Export and download results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
